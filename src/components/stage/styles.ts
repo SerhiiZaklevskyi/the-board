@@ -30,6 +30,6 @@ export const StageView = styled.div`
   }
 
   .addIcon {
-    text-align: center;
+    margin-left: 48%;
   }
 `

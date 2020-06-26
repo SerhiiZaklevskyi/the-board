@@ -6,6 +6,7 @@ const INITIAL_STATE: ITaskReducerState = {
   desription: '',
   status: '',
   mark: '',
+  id: '',
 }
 
 export default (state: ITaskReducerState = INITIAL_STATE, { type, payload }: IActionType): ITaskReducerState => {
