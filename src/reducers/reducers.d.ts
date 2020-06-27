@@ -4,10 +4,10 @@ export interface IActionType {
 }
 
 export interface ITaskReducerState {
-  headline?: string
-  desription?: string
-  status: string
-  mark?: string
+  headline?: string | nnull
+  desription?: string | null
+  status: string | null
+  mark?: string | null
   id: string
 }
 

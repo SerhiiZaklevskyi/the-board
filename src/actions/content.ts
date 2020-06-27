@@ -1,2 +1,10 @@
-import { IActionType, IContentReducerState } from '../reducers/reducers'
+import { IActionType, IContentReducerState, ITaskReducerState } from '../reducers/reducers'
 import { Content } from '../constants/task.enum'
+
+export const addTask = (task: ITaskReducerState) => ({
+  type: Content,
+  payload: (state: IContentReducerState) => ({
+    ...state,
+    selected: [...state.selected, task],
+  }),
+})
