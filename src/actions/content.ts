@@ -5,6 +5,6 @@ export const addTask = (task: ITaskReducerState) => ({
   type: Content,
   payload: (state: IContentReducerState) => ({
     ...state,
-    selected: [...state.selected, task],
+    tasks: [...state.tasks, task],
   }),
 })

@@ -12,9 +12,5 @@ export interface ITaskReducerState {
 }
 
 export interface IContentReducerState {
-  backlog: Array<ITaskReducerState>
-  selected: Array<ITaskReducerState>
-  running: Array<ITaskReducerState>
-  evaluating: Array<ITaskReducerState>
-  live: Array<ITaskReducerState>
+  tasks: Array<ITaskReducerState>
 }
