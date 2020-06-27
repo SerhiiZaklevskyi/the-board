@@ -1,7 +1,7 @@
-import { IActionType, IContentReducerState, ITaskReducerState } from '../reducers/reducers'
+import { IContentReducerState } from '../reducers/reducers'
 import { Content } from '../constants/task.enum'
 
-export const addTask = (task: ITaskReducerState) => ({
+export const addTask = (task: any) => ({
   type: Content,
   payload: (state: IContentReducerState) => ({
     ...state,

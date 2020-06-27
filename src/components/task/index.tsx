@@ -1,11 +1,24 @@
 import React from 'react'
 import { TaskView } from './styles'
+import SettingsIcon from '@material-ui/icons/Settings'
+import Mark from '../mark'
 
-const Task = () => {
+interface ITaskProps {
+  headline: string | undefined
+  description: string | undefined
+  mark: string | undefined
+  title: string
+}
+
+const Task = ({ headline, description, mark, title }: ITaskProps) => {
   return (
-    <TaskView>
-      <p className='headline'></p>
-      <p className='description'></p>
+    <TaskView title={title}>
+      <p className='headline'>{headline}</p>
+      <p className='description'>{description}</p>
+      <Mark name={mark} />
+      <span className='settings'>
+        <SettingsIcon />
+      </span>
     </TaskView>
   )
 }

@@ -3,7 +3,7 @@ import { Task } from '../constants/task.enum'
 
 const INITIAL_STATE: ITaskReducerState = {
   headline: '',
-  desription: '',
+  description: '',
   status: '',
   mark: '',
   id: '',

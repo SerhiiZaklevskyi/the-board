@@ -1,5 +1,3 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const WrapperView = styled.div`
-
-`
+export const WrapperView = styled.div``

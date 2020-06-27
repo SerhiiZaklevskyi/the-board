@@ -10,13 +10,14 @@ export const StageView = styled.div`
     display: flex;
     justify-content: space-between;
     color: white;
+    align-items: center;
+    font-size: 1.2rem;
   }
 
   .taskWrapper {
     position: relative;
     background-color: ${({ color }) => color};
-    min-height: 80vh;
-    padding: 1rem;
+    min-height: 85vh;
   }
 
   .overlay {
@@ -31,5 +32,9 @@ export const StageView = styled.div`
 
   .addIcon {
     margin-left: 48%;
+  }
+
+  .stageName {
+    width: 70%;
   }
 `

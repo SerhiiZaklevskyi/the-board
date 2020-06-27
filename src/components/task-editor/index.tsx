@@ -1,63 +1,60 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { TaskEditorView } from './styles'
 import { useDispatch } from 'react-redux'
 import { addTask } from '../../actions/content'
+import { Formik, Field } from 'formik'
+import { useSelector } from 'react-redux'
+import { IStore } from '../../store'
 
 interface IEditorProps {
   onClose: () => void
 }
 
 export const TaskEditor = ({ onClose }: IEditorProps) => {
-  const headline = useRef<HTMLInputElement>(null)
-  const description = useRef<HTMLTextAreaElement>(null)
-  const status = useRef<HTMLSelectElement>(null)
-  const mark = useRef<HTMLSelectElement>(null)
-
+  const { tasks } = useSelector((state: IStore) => state.content)
   const dispatch = useDispatch()
 
-  const handleSubmit = (event: any): void => {
-    event.preventDefault()
-    onClose()
-    const task = {
-      headline: headline.current && headline.current.value,
-      desription: description.current && description.current.value,
-      status: status.current && status.current.value,
-      mark: mark.current && mark.current.value,
-      id: '',
-    }
-    dispatch(addTask(task))
+  interface IFormikValues {
+    headline?: string
+    description?: string
+    status: string
+    mark?: string
   }
+
+  const values: IFormikValues = {
+    headline: '',
+    description: '',
+    status: 'Backlog',
+    mark: '',
+  }
+
+  const handleSubmit = (values: IFormikValues, { resetForm }: any) => {
+    onClose()
+    dispatch(addTask({ ...values, id: tasks.length + 1 }))
+    resetForm({})
+  }
+
   return (
-    <TaskEditorView>
-      <form onSubmit={handleSubmit}>
-        <p>
-          <input name='headline' placeholder='Enter headline...' ref={headline} />
-        </p>
-        <p>
-          <textarea name='description' placeholder='Provide description...' ref={description} />
-        </p>
-        <p className='selectWrapper'>
-          <select name='status' ref={status}>
-            <option>Backlog</option>
-            <option>Selected</option>
-            <option>Running</option>
-            <option>Evaluating</option>
-            <option>Live</option>
-          </select>
-        </p>
-        <p className='selectWrapper'>
-          <select name='mark' ref={mark}>
-            <option>None</option>
-            <option>Ui design</option>
-            <option>Marketing</option>
-            <option>Research</option>
-          </select>
-        </p>
-        <p>
-          <button type='submit'>Sumbit</button>
-        </p>
-      </form>
-    </TaskEditorView>
+    <Formik initialValues={values} onSubmit={handleSubmit}>
+      <TaskEditorView>
+        <Field name='headline' type='text' placeholder='Enter headline...' required />
+        <Field as='textarea' name='description' type='text' placeholder='Provide description...' />
+        <Field as='select' name='status'>
+          <option value='Backlog'>Backlog</option>
+          <option value='Selected'>Selected</option>
+          <option value='Running'>Running</option>
+          <option value='Evaluating'>Evaluating</option>
+          <option value='Live'>Live</option>
+        </Field>
+        <Field as='select' name='mark'>
+          <option value='None'>None</option>
+          <option value='Ui Design'>Ui Design</option>
+          <option value='Marketing'>Marketing</option>
+          <option value='Research'>Research</option>
+        </Field>
+        <button type='submit'>Submit</button>
+      </TaskEditorView>
+    </Formik>
   )
 }
 

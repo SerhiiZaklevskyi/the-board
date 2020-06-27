@@ -15,13 +15,18 @@ export const ModalView = styled.div<IStylesProps>`
   border-radius: 35px;
   text-align: center;
   display: ${({ show }) => (show ? 'block' : 'none')};
+  padding: 2.5rem;
 
   .close-modal {
     border: none;
     outline: none;
     cursor: pointer;
     position: absolute;
-    top: 0;
+    top: 5%;
     left: 90%;
+  }
+
+  .modal-header {
+    padding-bottom: 1rem;
   }
 `
