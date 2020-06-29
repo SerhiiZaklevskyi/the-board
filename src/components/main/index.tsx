@@ -1,13 +1,54 @@
 import React, { useState } from 'react'
 import { MainView } from './styles'
 import Stage from '../stage'
-import Modal from '../modal'
-import { IStore } from '../../store'
-import { useSelector } from 'react-redux'
 import { EmojiObjects, CompareArrows, Settings, HelpOutline, CheckCircleOutline } from '@material-ui/icons'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import Modal from '../modal'
+import { addTask } from '../../actions/content'
+import { useDispatch, useSelector } from 'react-redux'
+import { IStore } from '../../store'
+import { ITaskReducerState } from '../../reducers/reducers'
 
 const Main = () => {
+  const dispatch = useDispatch()
   const { tasks } = useSelector((state: IStore) => state.content)
+  const columns = [
+    {
+      color: '#a19c9c',
+      title: 'Backlog',
+      icon: <EmojiObjects />,
+      id: '1',
+    },
+    {
+      color: '#f5b516',
+      title: 'Selected',
+      icon: <CompareArrows />,
+      id: '2',
+    },
+    {
+      color: '#bf132d',
+      title: 'Running',
+      icon: <Settings />,
+      id: '3',
+    },
+    {
+      color: '#1db9d1',
+      title: 'Evaluating',
+      icon: <HelpOutline />,
+      id: '4',
+    },
+    {
+      color: '#60cf38',
+      title: 'Live',
+      icon: <CheckCircleOutline />,
+      id: '5',
+    },
+  ]
+
+  const filterTasks = (status: string) => {
+    return tasks.filter((task) => task.status === status)
+  }
 
   const [open, setOpen] = useState<boolean>(false)
 
@@ -19,49 +60,43 @@ const Main = () => {
     setOpen(false)
   }
 
-  const filterTasks = (status: string) => {
-    return tasks.filter((task) => task.status === status)
+  const values: ITaskReducerState = {
+    headline: '',
+    description: '',
+    status: 'Backlog',
+    mark: '',
+    id: '',
+  }
+
+  const handleSubmit = (values: ITaskReducerState, { resetForm }: any) => {
+    onClose()
+    dispatch(addTask({ ...values, id: tasks.length + 1 }))
+    resetForm({})
   }
 
   return (
-    <MainView>
-      <Stage
-        color='#a19c9c'
-        title='Backlog (Open)'
-        tasks={filterTasks('Backlog')}
-        handleClick={handleClick}
-        icon={<EmojiObjects />}
+    <DndProvider backend={HTML5Backend}>
+      <MainView>
+        {columns.map((column: any) => (
+          <Stage
+            color={column.color}
+            title={column.title}
+            icon={column.icon}
+            key={column.id}
+            handleClick={handleClick}
+            currentTasks={filterTasks(column.title)}
+          />
+        ))}
+      </MainView>
+      <Modal
+        show={open}
+        size='medium'
+        onClose={onClose}
+        values={values}
+        handleSubmit={handleSubmit}
+        header={'Create Task'}
       />
-      <Stage
-        color='#f5b516'
-        title='Selected'
-        tasks={filterTasks('Selected')}
-        handleClick={handleClick}
-        icon={<CompareArrows />}
-      />
-      <Stage
-        color='#bf132d'
-        title='Running'
-        tasks={filterTasks('Running')}
-        handleClick={handleClick}
-        icon={<Settings />}
-      />
-      <Stage
-        color='#1db9d1'
-        title='Evaluating'
-        tasks={filterTasks('Evaluating')}
-        handleClick={handleClick}
-        icon={<HelpOutline />}
-      />
-      <Stage
-        color='#60cf38'
-        title='Live'
-        tasks={filterTasks('Live')}
-        handleClick={handleClick}
-        icon={<CheckCircleOutline />}
-      />
-      <Modal show={open} size='medium' onClose={onClose} />
-    </MainView>
+    </DndProvider>
   )
 }
 

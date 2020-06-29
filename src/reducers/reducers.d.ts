@@ -8,7 +8,7 @@ export interface ITaskReducerState {
   description?: string
   status: string
   mark?: string
-  id: string
+  id?: string
 }
 
 export interface IContentReducerState {
