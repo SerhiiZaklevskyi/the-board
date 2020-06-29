@@ -9,7 +9,7 @@ export const addTask = (task: any) => ({
   }),
 })
 
-export const changeStatus = (task: any, index: any) => ({
+export const updateTask = (task: any, index: any) => ({
   type: Content,
   payload: (state: IContentReducerState) => ({
     ...state,

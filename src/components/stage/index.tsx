@@ -5,29 +5,27 @@ import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined'
 import { ITaskReducerState } from '../../reducers/reducers'
 import { ItemTypes } from '../task/constants'
 import { useDrop } from 'react-dnd'
-import { changeStatus } from '../../actions/content'
+import { updateTask } from '../../actions/content'
 import { useDispatch, useSelector } from 'react-redux'
 import { IStore } from '../../store'
 
 interface IStageProps {
   color: string
   title: string
-  handleClick: () => void
   icon: any
+  handleClick: () => void
+  currentTasks: Array<ITaskReducerState>
 }
 
-const Stage = ({ color, title, handleClick, icon }: IStageProps) => {
+const Stage = ({ color, title, icon, handleClick, currentTasks }: IStageProps) => {
   const dispatch = useDispatch()
   const { tasks } = useSelector((state: IStore) => state.content)
 
-  const filterTasks = (status: string) => {
-    return tasks.filter((task) => task.status === status)
-  }
   const changeTaskStatus = (element: any, status: string) => {
     let task = tasks.find((item) => item.id === element.id)
     const index = task && tasks.indexOf(task)
     task = { ...task, status }
-    dispatch(changeStatus(task, index))
+    dispatch(updateTask(task, index))
   }
 
   const [, drop] = useDrop({
@@ -36,16 +34,17 @@ const Stage = ({ color, title, handleClick, icon }: IStageProps) => {
       changeTaskStatus(item, title)
     },
   })
+
   return (
     <StageView color={color}>
       <div className='header'>
         <span className='stageIcon'>{icon}</span>
         <span className='stageName'>{title}</span>
-        <span className='stageCounter'>{tasks.length}</span>
+        <span className='stageCounter'>{currentTasks.length}</span>
       </div>
       <div className='taskWrapper' ref={drop}>
         <div className='overlay'>
-          {filterTasks(title).map((item: ITaskReducerState) => (
+          {currentTasks.map((item: ITaskReducerState) => (
             <Task
               key={item.id}
               headline={item.headline}
@@ -55,8 +54,8 @@ const Stage = ({ color, title, handleClick, icon }: IStageProps) => {
               id={item.id}
             />
           ))}
-          <span className='addIcon'>
-            <AddCircleOutlinedIcon style={{ fill: 'white', marginTop: '1rem' }} onClick={handleClick} />
+          <span>
+            <AddCircleOutlinedIcon className='addIcon' onClick={handleClick} />
           </span>
         </div>
       </div>
