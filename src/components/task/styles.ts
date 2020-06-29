@@ -8,10 +8,11 @@ export const TaskView = styled.div`
   position: relative;
 
   .headline {
-    font-weight: ${({ title }) => (title === 'Live' ? 'normal' : 'bold')};
+    font-weight: ${({ title }) => title !== 'Live' && 'bold'};
     font-size: 1.1rem;
     max-width: 90%;
-    text-decoration: ${({ title }) => (title === 'Live' ? 'line-through' : 'none')};
+    text-decoration: ${({ title }) => title === 'Live' && 'line-through'};
+    color: ${({ title }) => title === 'Live' && 'grey'};
   }
 
   .description {
@@ -20,7 +21,18 @@ export const TaskView = styled.div`
 
   .settings {
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 90%;
+  }
+
+  .completed {
+    display: flex;
+    color: green;
+    font-size: 1rem;
+    align-items: center;
+  }
+
+  .completeIcon {
+    width: 20%;
   }
 `

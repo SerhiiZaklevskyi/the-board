@@ -20,5 +20,38 @@ body{
     right:0;
     overflow:hidden;
 }
+
+@media screen and (max-width: 940px) {
+    html {
+      font-size: 11px;
+    }
+
+  }
+  
+  
+  @media screen and (max-width: 640px) {
+    html {
+      font-size: 7px;
+    }
+  }
+  
+  
+  @media screen and (max-width: 410px) {
+    html {
+      font-size: 5.5px;
+    }
+  }
+  
+  @media screen and (min-width: 1800px) {
+    html {
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (min-width: 2100px) {
+    html {
+      font-size: 25px;
+    }
+  }
   
 `

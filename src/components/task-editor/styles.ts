@@ -2,8 +2,9 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 
 export const TaskEditorView = styled(Form)`
+font-size: 1rem;
   input {
-    padding: 10px 20px;
+    padding: 0.7rem 1.3rem;
     border-radius: 15px;
     width: 93%;
     outline: none;
@@ -11,7 +12,7 @@ export const TaskEditorView = styled(Form)`
   }
 
   button[type='submit'] {
-    padding: 8px 25px;
+    padding: 0.5rem 1.5rem;
     border-radius: 10px;
     outline: none;
     background-color: blue;
