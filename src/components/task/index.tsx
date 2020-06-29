@@ -3,23 +3,24 @@ import { TaskView } from './styles'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Mark from '../mark'
 import { useDrag } from 'react-dnd'
-import { ItemTypes } from './constants'
 import Modal from '../modal'
 import { useSelector } from 'react-redux'
 import { IStore } from '../../store'
 import { useDispatch } from 'react-redux'
 import { updateTask } from '../../actions/content'
 import { ITaskReducerState } from '../../reducers/reducers'
+import { ItemTypes } from './constants'
+import { CheckCircleOutline } from '@material-ui/icons'
 
 interface ITaskProps {
   headline?: string
   description?: string
   mark?: string
-  title?: string
+  status?: any
   id?: string
 }
 
-const Task = ({ headline, description, mark, title, id }: ITaskProps) => {
+const Task = ({ headline, description, mark, status, id }: ITaskProps) => {
   const [, drag] = useDrag({
     item: { type: ItemTypes.TASK, id },
   })
@@ -40,18 +41,17 @@ const Task = ({ headline, description, mark, title, id }: ITaskProps) => {
   const values: ITaskReducerState = {
     headline,
     description,
-    // eslint-disable-next-line no-restricted-globals
     status,
     mark,
     id,
   }
 
   const handleSubmit = (values: ITaskReducerState, { resetForm }: any) => {
-    onClose()
     let task = tasks.find((item) => item.id === id)
     const index = task && tasks.indexOf(task)
     dispatch(updateTask({ ...values }, index))
     resetForm({})
+    onClose()
   }
 
   return (
@@ -66,7 +66,15 @@ const Task = ({ headline, description, mark, title, id }: ITaskProps) => {
           header={'Edit Task'}
         />
       )}
-      <TaskView title={title} ref={drag}>
+      <TaskView title={status} ref={drag}>
+        {status === 'Live' && (
+          <div className='completed'>
+            <span className='completeIcon'>
+              <CheckCircleOutline />
+            </span>
+            <span>Completed</span>
+          </div>
+        )}
         <p className='headline'>{headline}</p>
         <p className='description'>{description}</p>
         <Mark name={mark} />

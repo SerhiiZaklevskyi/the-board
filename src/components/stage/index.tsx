@@ -3,11 +3,11 @@ import { StageView } from './styles'
 import Task from '../task'
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined'
 import { ITaskReducerState } from '../../reducers/reducers'
-import { ItemTypes } from '../task/constants'
 import { useDrop } from 'react-dnd'
 import { updateTask } from '../../actions/content'
 import { useDispatch, useSelector } from 'react-redux'
 import { IStore } from '../../store'
+import { ItemTypes } from '../task/constants'
 
 interface IStageProps {
   color: string
@@ -50,7 +50,7 @@ const Stage = ({ color, title, icon, handleClick, currentTasks }: IStageProps) =
               headline={item.headline}
               description={item.description}
               mark={item.mark}
-              title={title}
+              status={title}
               id={item.id}
             />
           ))}
