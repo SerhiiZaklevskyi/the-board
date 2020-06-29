@@ -4,16 +4,11 @@ import { Content } from '../constants/task.enum'
 const INITIAL_STATE: IContentReducerState = {
   tasks: [
     {
-      headline: 'backlog',
-      desription: 'backlog',
-      status: 'backlog',
-      mark: 'backlog',
-    },
-    {
-      headline: 'running',
-      desription: 'running',
-      status: 'running',
-      mark: 'running',
+      headline: 'Mind mapping ing education video and learn some other stuff',
+      description: 'Experiement with the value of marketing contect articles marketing contect articles',
+      status: 'Backlog',
+      mark: 'Marketing',
+      id: '1',
     },
   ],
 }

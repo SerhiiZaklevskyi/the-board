@@ -5,9 +5,10 @@ export interface IActionType {
 
 export interface ITaskReducerState {
   headline?: string
-  desription: string
+  description?: string
   status: string
   mark?: string
+  id: string
 }
 
 export interface IContentReducerState {
