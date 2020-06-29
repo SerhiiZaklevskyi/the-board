@@ -8,3 +8,11 @@ export const addTask = (task: any) => ({
     tasks: [...state.tasks, task],
   }),
 })
+
+export const updateTask = (task: any, index: any) => ({
+  type: Content,
+  payload: (state: IContentReducerState) => ({
+    ...state,
+    tasks: [...state.tasks.slice(0, index), task, ...state.tasks.slice(index + 1)],
+  }),
+})

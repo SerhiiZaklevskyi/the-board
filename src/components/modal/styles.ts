@@ -7,15 +7,24 @@ interface IStylesProps {
 }
 
 export const ModalView = styled.div<IStylesProps>`
-  width: ${({ size }) => MODAL_SIZE[size]};
-  position: absolute;
-  top: calc(50vh - 590px / 2);
-  left: calc(50% - ${({ size }) => MODAL_SIZE[size]} / 2);
-  background: white;
-  border-radius: 35px;
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
   display: ${({ show }) => (show ? 'block' : 'none')};
-  padding: 2.5rem;
+
+  .modal-wrapper {
+    width: ${({ size }) => MODAL_SIZE[size]};
+    position: absolute;
+    top: calc(50vh - 590px / 2);
+    left: calc(50% - ${({ size }) => MODAL_SIZE[size]} / 2);
+    background: white;
+    border-radius: 35px;
+    text-align: center;
+    padding: 2.5rem;
+  }
 
   .close-modal {
     border: none;

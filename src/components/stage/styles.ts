@@ -30,11 +30,13 @@ export const StageView = styled.div`
     height: 100%;
   }
 
-  .addIcon {
-    margin-left: 48%;
-  }
-
   .stageName {
     width: 70%;
+  }
+
+  .addIcon {
+    fill: white;
+    margin-top: 1rem;
+    margin-left: 45%;
   }
 `

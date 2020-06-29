@@ -1,39 +1,13 @@
 import React from 'react'
 import { TaskEditorView } from './styles'
-import { useDispatch } from 'react-redux'
-import { addTask } from '../../actions/content'
 import { Formik, Field } from 'formik'
-import { useSelector } from 'react-redux'
-import { IStore } from '../../store'
 
 interface IEditorProps {
-  onClose: () => void
+  values: any
+  handleSubmit: any
 }
 
-export const TaskEditor = ({ onClose }: IEditorProps) => {
-  const { tasks } = useSelector((state: IStore) => state.content)
-  const dispatch = useDispatch()
-
-  interface IFormikValues {
-    headline?: string
-    description?: string
-    status: string
-    mark?: string
-  }
-
-  const values: IFormikValues = {
-    headline: '',
-    description: '',
-    status: 'Backlog',
-    mark: '',
-  }
-
-  const handleSubmit = (values: IFormikValues, { resetForm }: any) => {
-    onClose()
-    dispatch(addTask({ ...values, id: tasks.length + 1 }))
-    resetForm({})
-  }
-
+export const TaskEditor = ({ values, handleSubmit }: IEditorProps) => {
   return (
     <Formik initialValues={values} onSubmit={handleSubmit}>
       <TaskEditorView>
