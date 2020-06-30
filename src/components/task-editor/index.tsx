@@ -13,7 +13,7 @@ export const TaskEditor = ({ values, handleSubmit }: IEditorProps) => {
     <Formik initialValues={values} onSubmit={handleSubmit}>
       <TaskEditorView>
         <Field name='headline' type='text' placeholder='Enter headline...' required maxLength='70' />
-        <Field as='textarea' name='description' type='text' placeholder='Provide description...' />
+        <Field as='textarea' name='description' type='text' placeholder='Provide description...' maxLength='200' />
         <Field as='select' name='status'>
           <option value='Backlog'>Backlog</option>
           <option value='Selected'>Selected</option>
