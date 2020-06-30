@@ -1,17 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MainView } from './styles'
 import Stage from '../stage'
 import { EmojiObjects, CompareArrows, Settings, HelpOutline, CheckCircleOutline } from '@material-ui/icons'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Modal from '../modal'
-import { addTask } from '../../actions/content'
+import { createTask, getAllTasks } from '../../actions/content'
 import { useDispatch, useSelector } from 'react-redux'
 import { IStore } from '../../store'
 import { ITaskReducerState } from '../../reducers/reducers'
 
 const Main = () => {
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllTasks())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const { tasks } = useSelector((state: IStore) => state.content)
   const columns = [
     {
@@ -65,12 +71,12 @@ const Main = () => {
     description: '',
     status: 'Backlog',
     mark: '',
-    id: '',
+    _id: '',
   }
 
-  const handleSubmit = (values: ITaskReducerState, { resetForm }: any) => {
+  const handleSubmit = (values: ITaskReducerState, { resetForm }: any): void => {
     onClose()
-    dispatch(addTask({ ...values, id: tasks.length + 1 }))
+    dispatch(createTask({ ...values }))
     resetForm({})
   }
 

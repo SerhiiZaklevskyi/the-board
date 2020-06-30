@@ -7,7 +7,7 @@ import Modal from '../modal'
 import { useSelector } from 'react-redux'
 import { IStore } from '../../store'
 import { useDispatch } from 'react-redux'
-import { updateTask } from '../../actions/content'
+import { updateTask, removeTask } from '../../actions/content'
 import { ITaskReducerState } from '../../reducers/reducers'
 import { ItemTypes } from './constants'
 import { CheckCircleOutline } from '@material-ui/icons'
@@ -17,12 +17,12 @@ interface ITaskProps {
   description?: string
   mark?: string
   status?: any
-  id?: string
+  _id?: string
 }
 
-const Task = ({ headline, description, mark, status, id }: ITaskProps) => {
+const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
   const [, drag] = useDrag({
-    item: { type: ItemTypes.TASK, id },
+    item: { type: ItemTypes.TASK, _id },
   })
 
   const [editable, seteditable] = useState<boolean>(false)
@@ -43,15 +43,20 @@ const Task = ({ headline, description, mark, status, id }: ITaskProps) => {
     description,
     status,
     mark,
-    id,
+    _id,
   }
 
-  const handleSubmit = (values: ITaskReducerState, { resetForm }: any) => {
-    let task = tasks.find((item) => item.id === id)
+  const handleSubmit = (values: any, { resetForm }: any) => {
+    let task = tasks.find((item) => item._id === _id)
     const index = task && tasks.indexOf(task)
     dispatch(updateTask({ ...values }, index))
     resetForm({})
     onClose()
+  }
+
+  const deleteTask = () => {
+    let task = tasks.find((item) => item._id === _id)
+    task && dispatch(removeTask(task))
   }
 
   return (
@@ -77,7 +82,10 @@ const Task = ({ headline, description, mark, status, id }: ITaskProps) => {
         )}
         <p className='headline'>{headline}</p>
         <p className='description'>{description}</p>
-        <Mark name={mark} />
+        {mark && <Mark name={mark} />}
+        <span className='delete' onClick={deleteTask}>
+          &times;
+        </span>
         <span className='settings'>
           <SettingsIcon onClick={handleClick} />
         </span>

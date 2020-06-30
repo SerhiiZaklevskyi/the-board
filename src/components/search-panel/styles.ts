@@ -18,7 +18,7 @@ export const SearchView = styled.div<IStylesProps>`
 
   .searchIcon {
     position: absolute;
-    top: 40%;
+    top: 30%;
     right: 2%;
     cursor: pointer;
   }

@@ -20,6 +20,11 @@ body{
     right:0;
     overflow:hidden;
 }
+.toast{
+    background: black;
+    color: white;
+    font-size: 1rem;
+}
 
 @media screen and (max-width: 940px) {
     html {

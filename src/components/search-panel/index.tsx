@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import { useSelector } from 'react-redux'
 import { IStore } from '../../store'
 import SearchResult from '../search-result'
+import { ITaskReducerState } from '../../reducers/reducers'
 
 const SearchPanel = () => {
   const inputRef: any = useRef(null)
@@ -39,7 +40,13 @@ const SearchPanel = () => {
     showResult()
   }
 
-  const handleClickOutside = (event: any): void => {
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleClick()
+    }
+  }
+
+  const handleClickOutside = (event: MouseEvent): void => {
     const element: any = event.target
     if (resultWrapper.current && !resultWrapper.current.contains(element)) {
       onClose()
@@ -55,14 +62,14 @@ const SearchPanel = () => {
   })
 
   return (
-    <SearchView show={open}>
+    <SearchView show={open} onKeyPress={handleKeyPress}>
       <input type='text' name='search' ref={inputRef} />
       <SearchIcon className='searchIcon' color='primary' onClick={handleClick} />
       <div className='searchResult' ref={resultWrapper}>
         {searchResult.length !== 0 ? (
-          searchResult.map((task: any) => (
+          searchResult.map((task: ITaskReducerState) => (
             <SearchResult
-              key={task.id}
+              key={task._id}
               headline={task.headline}
               description={task.description}
               mark={task.mark}

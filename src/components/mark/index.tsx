@@ -2,7 +2,7 @@ import React from 'react'
 import { MarkView } from './styles'
 
 interface IMarkProps {
-  name: string | undefined
+  name: string
 }
 
 const Mark = ({ name }: IMarkProps) => {
