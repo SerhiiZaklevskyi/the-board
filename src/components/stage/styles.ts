@@ -18,6 +18,7 @@ export const StageView = styled.div`
     position: relative;
     background-color: ${({ color }) => color};
     min-height: 85vh;
+    overflow-y: auto;
   }
 
   .overlay {
@@ -27,7 +28,7 @@ export const StageView = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
   }
 
   .stageName {

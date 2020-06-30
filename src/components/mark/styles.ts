@@ -17,7 +17,7 @@ const nameVariants = [
 
 export const MarkView = styled.span<IStyledProps>`
   background: ${({ name }) => nameChecker(name)};
-  padding: 7px 6px;
+  padding: 0.4rem 0.3rem;
   border-radius: 6px;
   color: white;
   font-size: 0.8rem;
