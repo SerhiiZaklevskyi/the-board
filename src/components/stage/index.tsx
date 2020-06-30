@@ -22,7 +22,7 @@ const Stage = ({ color, title, icon, handleClick, currentTasks }: IStageProps) =
   const { tasks } = useSelector((state: IStore) => state.content)
 
   const changeTaskStatus = (element: any, status: string) => {
-    let task = tasks.find((item) => item.id === element.id)
+    let task = tasks.find((item) => item._id === element._id)
     const index = task && tasks.indexOf(task)
     task = { ...task, status }
     dispatch(updateTask(task, index))
@@ -46,12 +46,12 @@ const Stage = ({ color, title, icon, handleClick, currentTasks }: IStageProps) =
         <div className='overlay'>
           {currentTasks.map((item: ITaskReducerState) => (
             <Task
-              key={item.id}
+              key={item._id}
               headline={item.headline}
               description={item.description}
               mark={item.mark}
               status={title}
-              id={item.id}
+              _id={item._id}
             />
           ))}
           <span>

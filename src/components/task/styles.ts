@@ -35,4 +35,13 @@ export const TaskView = styled.div`
   .completeIcon {
     width: 20%;
   }
+
+  .delete {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 3%;
+  }
 `

@@ -62,7 +62,7 @@ const SearchPanel = () => {
         {searchResult.length !== 0 ? (
           searchResult.map((task: any) => (
             <SearchResult
-              key={task.id}
+              key={task._id}
               headline={task.headline}
               description={task.description}
               mark={task.mark}
