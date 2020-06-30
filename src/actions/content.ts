@@ -23,13 +23,13 @@ export const updateTask = (task: ITaskReducerState, index: any) => async (dispat
 
 export const createTask = (task: ITaskReducerState) => async (dispatch: any) => {
   try {
-    await HTTP.post(`${TASK_ENDPOINT}/tasks`, task)
+    const response = await HTTP.post(`${TASK_ENDPOINT}/tasks`, task)
 
     dispatch({
       type: Content,
       payload: (state: IContentReducerState) => ({
         ...state,
-        tasks: [...state.tasks, task],
+        tasks: [...state.tasks, response],
       }),
     })
   } catch (error) {

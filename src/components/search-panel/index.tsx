@@ -40,6 +40,12 @@ const SearchPanel = () => {
     showResult()
   }
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleClick()
+    }
+  }
+
   const handleClickOutside = (event: MouseEvent): void => {
     const element: any = event.target
     if (resultWrapper.current && !resultWrapper.current.contains(element)) {
@@ -56,7 +62,7 @@ const SearchPanel = () => {
   })
 
   return (
-    <SearchView show={open}>
+    <SearchView show={open} onKeyPress={handleKeyPress}>
       <input type='text' name='search' ref={inputRef} />
       <SearchIcon className='searchIcon' color='primary' onClick={handleClick} />
       <div className='searchResult' ref={resultWrapper}>

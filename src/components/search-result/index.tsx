@@ -11,7 +11,7 @@ interface ISearchResultProps {
 const SearchResult = ({ headline, description, status, mark }: ISearchResultProps) => {
   return (
     <ResultsView>
-      <span>{`${headline} на стадии ${status} ${mark && `с индетификатором ${mark}`}`}</span>
+      <span>{`- ${headline} на стадии ${status} ${mark && `с индетификатором ${mark}`}`}</span>
     </ResultsView>
   )
 }
