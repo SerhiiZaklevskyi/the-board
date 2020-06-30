@@ -3,12 +3,13 @@ import { ModalView } from './styles'
 import { SizeType } from './constants'
 import TaskEditor from '../task-editor'
 import ReactDOM from 'react-dom'
+import { ITaskReducerState } from '../../reducers/reducers'
 
 interface IModalProps {
   size: SizeType
   show: boolean
   onClose: () => void
-  values: any
+  values: ITaskReducerState
   handleSubmit: any
   header: string
 }

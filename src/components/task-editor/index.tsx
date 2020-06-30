@@ -1,9 +1,10 @@
 import React from 'react'
 import { TaskEditorView } from './styles'
 import { Formik, Field } from 'formik'
+import { ITaskReducerState } from '../../reducers/reducers'
 
 interface IEditorProps {
-  values: any
+  values: ITaskReducerState
   handleSubmit: any
 }
 

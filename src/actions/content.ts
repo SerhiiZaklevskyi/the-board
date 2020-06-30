@@ -1,10 +1,11 @@
-import { IContentReducerState } from '../reducers/reducers'
+import { IContentReducerState, ITaskReducerState } from '../reducers/reducers'
 import { Content } from '../constants/task.enum'
 import HTTP from '../common/api'
+import { toast } from 'react-toastify'
 
 const TASK_ENDPOINT: string = 'mybox_6d9e326c183faddwac18s'
 
-export const updateTask = (task: any, index: any) => async (dispatch: any) => {
+export const updateTask = (task: ITaskReducerState, index: any) => async (dispatch: any) => {
   try {
     await HTTP.put(`${TASK_ENDPOINT}/${task._id}`, task)
 
@@ -16,11 +17,11 @@ export const updateTask = (task: any, index: any) => async (dispatch: any) => {
       }),
     })
   } catch (error) {
-    throw new Error(JSON.stringify(error.response.data))
+    toast(JSON.stringify(error.data.message))
   }
 }
 
-export const createTask = (task: any) => async (dispatch: any) => {
+export const createTask = (task: ITaskReducerState) => async (dispatch: any) => {
   try {
     await HTTP.post(`${TASK_ENDPOINT}/tasks`, task)
 
@@ -32,11 +33,11 @@ export const createTask = (task: any) => async (dispatch: any) => {
       }),
     })
   } catch (error) {
-    throw new Error(JSON.stringify(error.response.data))
+    toast(JSON.stringify(error.data.message))
   }
 }
 
-export const removeTask = (task: any) => async (dispatch: any) => {
+export const removeTask = (task: ITaskReducerState) => async (dispatch: any) => {
   try {
     await HTTP.delete(`${TASK_ENDPOINT}/${task._id}`)
 
@@ -48,7 +49,7 @@ export const removeTask = (task: any) => async (dispatch: any) => {
       }),
     })
   } catch (error) {
-    throw new Error(JSON.stringify(error.response.data))
+    toast(JSON.stringify(error.data.message))
   }
 }
 

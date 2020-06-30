@@ -46,7 +46,7 @@ const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
     _id,
   }
 
-  const handleSubmit = (values: ITaskReducerState, { resetForm }: any) => {
+  const handleSubmit = (values: any, { resetForm }: any) => {
     let task = tasks.find((item) => item._id === _id)
     const index = task && tasks.indexOf(task)
     dispatch(updateTask({ ...values }, index))
@@ -56,7 +56,7 @@ const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
 
   const deleteTask = () => {
     let task = tasks.find((item) => item._id === _id)
-    dispatch(removeTask(task))
+    task && dispatch(removeTask(task))
   }
 
   return (
@@ -82,7 +82,7 @@ const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
         )}
         <p className='headline'>{headline}</p>
         <p className='description'>{description}</p>
-        <Mark name={mark} />
+        {mark && <Mark name={mark} />}
         <span className='delete' onClick={deleteTask}>
           &times;
         </span>

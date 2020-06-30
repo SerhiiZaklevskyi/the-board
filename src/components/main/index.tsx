@@ -15,6 +15,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getAllTasks())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { tasks } = useSelector((state: IStore) => state.content)
@@ -73,7 +74,7 @@ const Main = () => {
     _id: '',
   }
 
-  const handleSubmit = (values: ITaskReducerState, { resetForm }: any) => {
+  const handleSubmit = (values: ITaskReducerState, { resetForm }: any): void => {
     onClose()
     dispatch(createTask({ ...values }))
     resetForm({})
