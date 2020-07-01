@@ -12,6 +12,11 @@ export const TaskView = styled.div`
     font-size: 1.1rem;
     text-decoration: ${({ title }) => title === 'Live' && 'line-through'};
     color: ${({ title }) => title === 'Live' && 'grey'};
+    overflow: hidden;
+  }
+
+  .description {
+    overflow: hidden;
   }
 
   .settings {
@@ -38,5 +43,6 @@ export const TaskView = styled.div`
     position: absolute;
     top: 0;
     left: 3%;
+    background: transparent;
   }
 `
