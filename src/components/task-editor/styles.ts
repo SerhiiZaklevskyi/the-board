@@ -6,9 +6,10 @@ font-size: 1rem;
   input {
     padding: 0.7rem 1.3rem;
     border-radius: 15px;
-    width: 93%;
+    width: 94%;
     outline: none;
     margin-bottom: 1rem;
+    border: 1px solid blue;
   }
 
   button[type='submit'] {
@@ -18,6 +19,7 @@ font-size: 1rem;
     background-color: blue;
     color: white;
     cursor: pointer;
+    border: 1px solid blue;
   }
 
   textarea {
@@ -27,15 +29,17 @@ font-size: 1rem;
     border-radius: 15px;
     outline: none;
     margin-bottom: 1rem;
+    border: 1px solid blue;
   }
 
    select {
-      min-width: 120px;
+      min-width: 200px;
       padding: 10px 15px;
       border-radius: 15px;
       outline: none;
       display: block;
       margin-bottom: 1rem;
+      border: 1px solid blue;
       
     }
   }

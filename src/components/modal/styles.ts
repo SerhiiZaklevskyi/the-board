@@ -33,6 +33,7 @@ export const ModalView = styled.div<IStylesProps>`
     position: absolute;
     top: 5%;
     left: 90%;
+    background: transparent;
   }
 
   .modal-header {
