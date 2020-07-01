@@ -6,7 +6,7 @@ font-size: 1rem;
   input {
     padding: 0.7rem 1.3rem;
     border-radius: 15px;
-    width: 94%;
+    width: 92%;
     outline: none;
     margin-bottom: 1rem;
     border: 1px solid blue;
@@ -23,13 +23,14 @@ font-size: 1rem;
   }
 
   textarea {
-    width: 100%;
+    width: 95%;
     min-height: 150px;
     resize: none;
     border-radius: 15px;
     outline: none;
     margin-bottom: 1rem;
     border: 1px solid blue;
+    padding: 8px;
   }
 
    select {

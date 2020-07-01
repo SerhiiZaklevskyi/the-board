@@ -23,6 +23,7 @@ export const TaskView = styled.div`
     position: absolute;
     top: 0;
     right: 1%;
+    cursor: pointer;
   }
 
   .completed {

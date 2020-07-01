@@ -39,5 +39,6 @@ export const StageView = styled.div`
     fill: white;
     margin-top: 1rem;
     margin-left: 45%;
+    cursor: pointer;
   }
 `
