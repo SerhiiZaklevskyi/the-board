@@ -35,8 +35,10 @@ const SearchPanel = () => {
   }
 
   const handleOpen = () => {
-    setSearchResult(filter())
-    showResult()
+    if (inputRef.current.value) {
+      setSearchResult(filter())
+      showResult()
+    }
   }
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
