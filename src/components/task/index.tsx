@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
-import { TaskView } from './styles'
-import SettingsIcon from '@material-ui/icons/Settings'
-import Mark from '../mark'
-import { useDrag } from 'react-dnd'
 import Modal from '../modal'
 import { useSelector } from 'react-redux'
 import { IStore } from '../../store'
 import { useDispatch } from 'react-redux'
 import { updateTask, removeTask } from '../../actions/content'
 import { ITaskReducerState } from '../../reducers/reducers'
-import { ItemTypes } from './constants'
-import { CheckCircleOutline } from '@material-ui/icons'
+import TaskUi from '../../ui/taskUi'
 
 interface ITaskProps {
   headline?: string
@@ -21,11 +16,9 @@ interface ITaskProps {
 }
 
 const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
-  const [, drag] = useDrag({
-    item: { type: ItemTypes.TASK, _id },
-  })
-
   const [editable, seteditable] = useState<boolean>(false)
+  const { tasks } = useSelector((state: IStore) => state.content)
+  const dispatch = useDispatch()
 
   const handleClick = (): void => {
     seteditable(true)
@@ -34,9 +27,6 @@ const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
   const onClose = (): void => {
     seteditable(false)
   }
-
-  const { tasks } = useSelector((state: IStore) => state.content)
-  const dispatch = useDispatch()
 
   const values: ITaskReducerState = {
     headline,
@@ -71,25 +61,15 @@ const Task = ({ headline, description, mark, status, _id }: ITaskProps) => {
           header={'Edit Task'}
         />
       )}
-      <TaskView title={status} ref={drag}>
-        {status === 'Live' && (
-          <div className='completed'>
-            <span className='completeIcon'>
-              <CheckCircleOutline />
-            </span>
-            <span>Completed</span>
-          </div>
-        )}
-        <p className='headline'>{headline}</p>
-        <p className='description'>{description}</p>
-        {mark && <Mark name={mark} />}
-        <span className='delete' onClick={deleteTask}>
-          &times;
-        </span>
-        <span className='settings'>
-          <SettingsIcon onClick={handleClick} />
-        </span>
-      </TaskView>
+      <TaskUi
+        openEditor={handleClick}
+        headline={headline}
+        description={description}
+        mark={mark}
+        status={status}
+        _id={_id}
+        deleteTask={deleteTask}
+      />
     </React.Fragment>
   )
 }

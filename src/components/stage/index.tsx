@@ -44,15 +44,8 @@ const Stage = ({ color, title, icon, handleClick, currentTasks }: IStageProps) =
       </div>
       <div className='taskWrapper' ref={drop}>
         <div className='overlay'>
-          {currentTasks.map((item: ITaskReducerState) => (
-            <Task
-              key={item._id}
-              headline={item.headline}
-              description={item.description}
-              mark={item.mark}
-              status={title}
-              _id={item._id}
-            />
+          {currentTasks.map(({ _id, headline, description, mark, status }: ITaskReducerState) => (
+            <Task key={_id} headline={headline} description={description} mark={mark} status={status} _id={_id} />
           ))}
           <span>
             <AddCircleOutlinedIcon className='addIcon' onClick={handleClick} />

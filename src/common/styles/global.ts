@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
-  * {
-      font-family: 'Muli', sans-serif;
+* {
+    font-family: 'Muli', sans-serif;
   }
-  html{
+html{
     min-height:100%;
     position:relative;
 }
@@ -33,13 +33,11 @@ body{
 
   }
   
-  
   @media screen and (max-width: 640px) {
     html {
       font-size: 7px;
     }
   }
-  
   
   @media screen and (max-width: 410px) {
     html {

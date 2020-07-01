@@ -83,14 +83,14 @@ const Main = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <MainView>
-        {columns.map((column: any) => (
+        {columns.map(({ color, title, icon, id }) => (
           <Stage
-            color={column.color}
-            title={column.title}
-            icon={column.icon}
-            key={column.id}
+            color={color}
+            title={title}
+            icon={icon}
+            key={id}
             handleClick={handleClick}
-            currentTasks={filterTasks(column.title)}
+            currentTasks={filterTasks(title)}
           />
         ))}
       </MainView>

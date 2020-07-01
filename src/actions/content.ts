@@ -17,7 +17,7 @@ export const updateTask = (task: ITaskReducerState, index: any) => async (dispat
       }),
     })
   } catch (error) {
-    toast(JSON.stringify(error.data.message))
+    error && toast(JSON.stringify(error.data))
   }
 }
 
@@ -33,7 +33,7 @@ export const createTask = (task: ITaskReducerState) => async (dispatch: any) => 
       }),
     })
   } catch (error) {
-    toast(JSON.stringify(error.data.message))
+    error && toast(JSON.stringify(error.data))
   }
 }
 
@@ -49,7 +49,7 @@ export const removeTask = (task: ITaskReducerState) => async (dispatch: any) => 
       }),
     })
   } catch (error) {
-    toast(JSON.stringify(error.data.message))
+    error && toast(JSON.stringify(error.data))
   }
 }
 

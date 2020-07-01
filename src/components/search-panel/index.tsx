@@ -10,6 +10,7 @@ const SearchPanel = () => {
   const inputRef: any = useRef(null)
   const resultWrapper: any = useRef<HTMLDivElement>()
   const [searchResult, setSearchResult] = useState<any>([])
+  const [open, setOpen] = useState<boolean>(false)
   const { tasks } = useSelector((state: IStore) => state.content)
 
   const filter = () => {
@@ -25,8 +26,6 @@ const SearchPanel = () => {
       .filter(({ label }) => label.toLowerCase().includes(inputRef.current.value.toLowerCase()))
   }
 
-  const [open, setOpen] = useState<boolean>(false)
-
   const showResult = (): void => {
     setOpen(true)
   }
@@ -35,14 +34,14 @@ const SearchPanel = () => {
     setOpen(false)
   }
 
-  const handleClick = () => {
+  const handleOpen = () => {
     setSearchResult(filter())
     showResult()
   }
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      handleClick()
+      handleOpen()
     }
   }
 
@@ -64,17 +63,11 @@ const SearchPanel = () => {
   return (
     <SearchView show={open} onKeyPress={handleKeyPress}>
       <input type='text' name='search' ref={inputRef} />
-      <SearchIcon className='searchIcon' color='primary' onClick={handleClick} />
+      <SearchIcon className='searchIcon' color='primary' onClick={handleOpen} />
       <div className='searchResult' ref={resultWrapper}>
         {searchResult.length !== 0 ? (
-          searchResult.map((task: ITaskReducerState) => (
-            <SearchResult
-              key={task._id}
-              headline={task.headline}
-              description={task.description}
-              mark={task.mark}
-              status={task.status}
-            />
+          searchResult.map(({ _id, headline, description, mark, status }: ITaskReducerState) => (
+            <SearchResult key={_id} headline={headline} description={description} mark={mark} status={status} />
           ))
         ) : (
           <span>Not found</span>
